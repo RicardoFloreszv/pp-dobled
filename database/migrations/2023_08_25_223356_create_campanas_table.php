@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('campanas', function (Blueprint $table) {
+            $table->id('id_campana');
+            $table->string('contrato_activo');
+            $table->string('contrato_inactivo');
+            $table->string('nombre_campana');
+            $table->unsignedBigInteger('id_cliente');
+            $table->foreign('id_cliente')->references('id_cliente')->on('clientes');
+            $table->date('fecha_inicio');
+            $table->date('fecha_fin');
+            $table->integer('dias');
+            $table->string('ejecutivo');
+            $table->date('fecha_modificacion');
+            $table->string('usuario_modificacion');
+            
+
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('campanas');
+    }
+};
